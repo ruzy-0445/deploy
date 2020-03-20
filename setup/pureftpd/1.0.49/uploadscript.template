@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+case $1 in
+  FULLPATH/FILENAME1) #特定檔案1
+    : #do something
+    ;;
+  FULLPATH/FILENAME2) #特定檔案1
+    : #do something
+    ;;
+  *) #其它檔案
+    : #do something
+    ;;
+esac

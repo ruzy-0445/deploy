@@ -1,0 +1,5 @@
+---
+- hosts: "{{ HOST }}"
+  roles:
+    - { role: ping }
+    - { role: setup_one }

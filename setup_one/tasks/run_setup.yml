@@ -1,0 +1,25 @@
+---
+- name: 清除可能的殘餘文件 /opt/src/{{ item }}
+  file:
+    path: /opt/src/{{ item }}
+    state: absent
+- name: 建立資源目錄 /opt/src/{{ item }}
+  file:
+    path: /opt/src/{{ item }}
+- name: 傳送安裝腳本 {{ item }}
+  copy:
+    src: "{{ item }}/setup.sh"
+    dest: "/opt/src/{{ item }}"
+- name: 傳送安裝包 {{ item }}
+  copy:
+    src: "{{ item }}/setup.tar.gz"
+    dest: "/opt/src/{{ item }}"
+  ignore_errors: true
+- name: 執行安裝 {{ item }}
+  shell: "sh setup.sh"
+  args:
+    chdir: "/opt/src/{{ item }}"
+  register: out
+- debug: var=out.stdout_lines
+- debug: 
+    msg: "{{ item }} 部屬完成"

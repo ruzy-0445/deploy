@@ -1,0 +1,9 @@
+---
+# setup pkg
+- name: 開始調用各個部屬腳本
+  include_tasks: run_setup.yml
+  loop: "{{ [ONE] }}"
+  when: 
+    - item|regex_search('(^setup*)')
+    - ansible_distribution == 'CentOS'
+    - ansible_distribution_major_version == '7'
